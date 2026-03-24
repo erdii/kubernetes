@@ -201,6 +201,11 @@ func (in *ApplyOptions) DeepCopyInto(out *ApplyOptions) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
+	if in.CreateOnly != nil {
+		in, out := &in.CreateOnly, &out.CreateOnly
+		*out = new(bool)
+		**out = **in
+	}
 	return
 }
 
@@ -843,6 +848,11 @@ func (in *PatchOptions) DeepCopyInto(out *PatchOptions) {
 	}
 	if in.Force != nil {
 		in, out := &in.Force, &out.Force
+		*out = new(bool)
+		**out = **in
+	}
+	if in.CreateOnly != nil {
+		in, out := &in.CreateOnly, &out.CreateOnly
 		*out = new(bool)
 		**out = **in
 	}

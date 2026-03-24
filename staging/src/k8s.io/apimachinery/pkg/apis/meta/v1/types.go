@@ -719,6 +719,16 @@ type PatchOptions struct {
 	// will contain all unknown and duplicate fields encountered.
 	// +optional
 	FieldValidation string `json:"fieldValidation,omitempty" protobuf:"bytes,4,name=fieldValidation"`
+
+	// CreateOnly indicates that the request should only succeed if it creates
+	// a new object. If the object already exists, the request will fail with
+	// a Conflict error. This is only applicable to Apply patch requests
+	// (application/apply-patch+yaml and application/apply-patch+cbor).
+	// For non-apply patch types, this field must be unset.
+	// When both CreateOnly and Force are set to true, the request will fail
+	// with a BadRequest error as these options are mutually exclusive.
+	// +optional
+	CreateOnly *bool `json:"createOnly,omitempty" protobuf:"varint,5,opt,name=createOnly"`
 }
 
 // ApplyOptions may be provided when applying an API object.
@@ -747,10 +757,27 @@ type ApplyOptions struct {
 	// as defined by https://golang.org/pkg/unicode/#IsPrint. This
 	// field is required.
 	FieldManager string `json:"fieldManager" protobuf:"bytes,3,name=fieldManager"`
+
+	// fieldValidation instructs the server on how to handle
+	// objects in the request containing unknown or duplicate fields.
+	// Valid values are:
+	// - Ignore: ignores unknown/duplicate fields.
+	// - Warn: warns about unknown/duplicate fields without failing.
+	// - Strict: fails on unknown/duplicate fields.
+	// +optional
+	FieldValidation string `json:"fieldValidation,omitempty" protobuf:"bytes,4,name=fieldValidation"`
+
+	// CreateOnly indicates that the apply should only succeed if it creates
+	// a new object. If the object already exists, the request will fail with
+	// a Conflict error. When both CreateOnly and Force are set to true, the
+	// request will fail with a BadRequest error as these options are mutually
+	// exclusive.
+	// +optional
+	CreateOnly *bool `json:"createOnly,omitempty" protobuf:"varint,5,opt,name=createOnly"`
 }
 
 func (o ApplyOptions) ToPatchOptions() PatchOptions {
-	return PatchOptions{DryRun: o.DryRun, Force: &o.Force, FieldManager: o.FieldManager}
+	return PatchOptions{DryRun: o.DryRun, Force: &o.Force, FieldManager: o.FieldManager, FieldValidation: o.FieldValidation, CreateOnly: o.CreateOnly}
 }
 
 // +k8s:conversion-gen:explicit-from=net/url.Values

@@ -3451,6 +3451,14 @@
         "operationId": "patchStorageV1CSIDriver",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -4367,6 +4375,14 @@
         "description": "partially update the specified CSINode",
         "operationId": "patchStorageV1CSINode",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -5475,6 +5491,14 @@
         "operationId": "patchStorageV1NamespacedCSIStorageCapacity",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -6391,6 +6415,14 @@
         "description": "partially update the specified StorageClass",
         "operationId": "patchStorageV1StorageClass",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -7309,6 +7341,14 @@
         "operationId": "patchStorageV1VolumeAttachment",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -7617,6 +7657,14 @@
         "description": "partially update status of the specified VolumeAttachment",
         "operationId": "patchStorageV1VolumeAttachmentStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -8534,6 +8582,14 @@
         "description": "partially update the specified VolumeAttributesClass",
         "operationId": "patchStorageV1VolumeAttributesClass",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",

@@ -3080,6 +3080,14 @@
         "operationId": "patchResourceV1beta1DeviceClass",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -4017,6 +4025,14 @@
         "operationId": "patchResourceV1beta1NamespacedResourceClaim",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -4335,6 +4351,14 @@
         "description": "partially update status of the specified ResourceClaim",
         "operationId": "patchResourceV1beta1NamespacedResourceClaimStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -5272,6 +5296,14 @@
         "description": "partially update the specified ResourceClaimTemplate",
         "operationId": "patchResourceV1beta1NamespacedResourceClaimTemplate",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -6529,6 +6561,14 @@
         "description": "partially update the specified ResourceSlice",
         "operationId": "patchResourceV1beta1ResourceSlice",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",

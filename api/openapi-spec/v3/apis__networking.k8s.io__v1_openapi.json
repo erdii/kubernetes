@@ -2502,6 +2502,14 @@
         "operationId": "patchNetworkingV1IngressClass",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -3589,6 +3597,14 @@
         "operationId": "patchNetworkingV1IPAddress",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -4526,6 +4542,14 @@
         "operationId": "patchNetworkingV1NamespacedIngress",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -4844,6 +4868,14 @@
         "description": "partially update status of the specified Ingress",
         "operationId": "patchNetworkingV1NamespacedIngressStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -5781,6 +5813,14 @@
         "description": "partially update the specified NetworkPolicy",
         "operationId": "patchNetworkingV1NamespacedNetworkPolicy",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -6869,6 +6909,14 @@
         "operationId": "patchNetworkingV1ServiceCIDR",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -7177,6 +7225,14 @@
         "description": "partially update status of the specified ServiceCIDR",
         "operationId": "patchNetworkingV1ServiceCIDRStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",

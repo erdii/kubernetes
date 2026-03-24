@@ -166,6 +166,23 @@ message ApplyOptions {
   // as defined by https://golang.org/pkg/unicode/#IsPrint. This
   // field is required.
   optional string fieldManager = 3;
+
+  // fieldValidation instructs the server on how to handle
+  // objects in the request containing unknown or duplicate fields.
+  // Valid values are:
+  // - Ignore: ignores unknown/duplicate fields.
+  // - Warn: warns about unknown/duplicate fields without failing.
+  // - Strict: fails on unknown/duplicate fields.
+  // +optional
+  optional string fieldValidation = 4;
+
+  // CreateOnly indicates that the apply should only succeed if it creates
+  // a new object. If the object already exists, the request will fail with
+  // a Conflict error. When both CreateOnly and Force are set to true, the
+  // request will fail with a BadRequest error as these options are mutually
+  // exclusive.
+  // +optional
+  optional bool createOnly = 5;
 }
 
 // Condition contains details for one aspect of the current state of this API Resource.
@@ -1025,6 +1042,16 @@ message PatchOptions {
   // will contain all unknown and duplicate fields encountered.
   // +optional
   optional string fieldValidation = 4;
+
+  // CreateOnly indicates that the request should only succeed if it creates
+  // a new object. If the object already exists, the request will fail with
+  // a Conflict error. This is only applicable to Apply patch requests
+  // (application/apply-patch+yaml and application/apply-patch+cbor).
+  // For non-apply patch types, this field must be unset.
+  // When both CreateOnly and Force are set to true, the request will fail
+  // with a BadRequest error as these options are mutually exclusive.
+  // +optional
+  optional bool createOnly = 5;
 }
 
 // Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.

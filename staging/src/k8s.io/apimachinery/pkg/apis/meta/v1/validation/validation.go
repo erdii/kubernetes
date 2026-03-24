@@ -195,9 +195,16 @@ func ValidatePatchOptions(options *metav1.PatchOptions, patchType types.PatchTyp
 			// This field is defaulted to "kubectl" by kubectl, but HAS TO be explicitly set by controllers.
 			allErrs = append(allErrs, field.Required(field.NewPath("fieldManager"), "is required for apply patch"))
 		}
+		// Validate mutual exclusivity of CreateOnly and Force
+		if options.CreateOnly != nil && *options.CreateOnly && options.Force != nil && *options.Force {
+			allErrs = append(allErrs, field.Invalid(field.NewPath("createOnly"), *options.CreateOnly, "may not be true when force is true"))
+		}
 	default:
 		if options.Force != nil {
 			allErrs = append(allErrs, field.Forbidden(field.NewPath("force"), "may not be specified for non-apply patch"))
+		}
+		if options.CreateOnly != nil {
+			allErrs = append(allErrs, field.Forbidden(field.NewPath("createOnly"), "may not be specified for non-apply patch"))
 		}
 	}
 	allErrs = append(allErrs, ValidateFieldManager(options.FieldManager, field.NewPath("fieldManager"))...)

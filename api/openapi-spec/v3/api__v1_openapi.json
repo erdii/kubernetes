@@ -11863,6 +11863,14 @@
         "operationId": "patchCoreV1NamespacedConfigMap",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -12799,6 +12807,14 @@
         "description": "partially update the specified Endpoints",
         "operationId": "patchCoreV1NamespacedEndpoints",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -13737,6 +13753,14 @@
         "operationId": "patchCoreV1NamespacedEvent",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -14673,6 +14697,14 @@
         "description": "partially update the specified LimitRange",
         "operationId": "patchCoreV1NamespacedLimitRange",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -15611,6 +15643,14 @@
         "operationId": "patchCoreV1NamespacedPersistentVolumeClaim",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -15929,6 +15969,14 @@
         "description": "partially update status of the specified PersistentVolumeClaim",
         "operationId": "patchCoreV1NamespacedPersistentVolumeClaimStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -16867,6 +16915,14 @@
         "operationId": "patchCoreV1NamespacedPod",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -17473,6 +17529,14 @@
         "description": "partially update ephemeralcontainers of the specified Pod",
         "operationId": "patchCoreV1NamespacedPodEphemeralcontainers",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -18809,6 +18873,14 @@
         "operationId": "patchCoreV1NamespacedPodResize",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -19127,6 +19199,14 @@
         "description": "partially update status of the specified Pod",
         "operationId": "patchCoreV1NamespacedPodStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -20065,6 +20145,14 @@
         "operationId": "patchCoreV1NamespacedPodTemplate",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -21002,6 +21090,14 @@
         "operationId": "patchCoreV1NamespacedReplicationController",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -21321,6 +21417,14 @@
         "operationId": "patchCoreV1NamespacedReplicationControllerScale",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -21639,6 +21743,14 @@
         "description": "partially update status of the specified ReplicationController",
         "operationId": "patchCoreV1NamespacedReplicationControllerStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -22577,6 +22689,14 @@
         "operationId": "patchCoreV1NamespacedResourceQuota",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -22895,6 +23015,14 @@
         "description": "partially update status of the specified ResourceQuota",
         "operationId": "patchCoreV1NamespacedResourceQuotaStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -23833,6 +23961,14 @@
         "operationId": "patchCoreV1NamespacedSecret",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -24769,6 +24905,14 @@
         "description": "partially update the specified ServiceAccount",
         "operationId": "patchCoreV1NamespacedServiceAccount",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -25870,6 +26014,14 @@
         "operationId": "patchCoreV1NamespacedService",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -26657,6 +26809,14 @@
         "operationId": "patchCoreV1NamespacedServiceStatus",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -27089,6 +27249,14 @@
         "description": "partially update the specified Namespace",
         "operationId": "patchCoreV1Namespace",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -27526,6 +27694,14 @@
         "description": "partially update status of the specified Namespace",
         "operationId": "patchCoreV1NamespaceStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -28444,6 +28620,14 @@
         "operationId": "patchCoreV1Node",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -29200,6 +29384,14 @@
         "description": "partially update status of the specified Node",
         "operationId": "patchCoreV1NodeStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
@@ -30288,6 +30480,14 @@
         "operationId": "patchCoreV1PersistentVolume",
         "parameters": [
           {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
+          {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",
             "name": "dryRun",
@@ -30596,6 +30796,14 @@
         "description": "partially update status of the specified PersistentVolume",
         "operationId": "patchCoreV1PersistentVolumeStatus",
         "parameters": [
+          {
+            "in": "query",
+            "name": "createOnly",
+            "schema": {
+              "type": "boolean",
+              "uniqueItems": true
+            }
+          },
           {
             "description": "When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed",
             "in": "query",

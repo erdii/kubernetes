@@ -429,6 +429,21 @@ func (m *ApplyOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.CreateOnly != nil {
+		i--
+		if *m.CreateOnly {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x28
+	}
+	i -= len(m.FieldValidation)
+	copy(dAtA[i:], m.FieldValidation)
+	i = encodeVarintGenerated(dAtA, i, uint64(len(m.FieldValidation)))
+	i--
+	dAtA[i] = 0x22
 	i -= len(m.FieldManager)
 	copy(dAtA[i:], m.FieldManager)
 	i = encodeVarintGenerated(dAtA, i, uint64(len(m.FieldManager)))
@@ -1652,6 +1667,16 @@ func (m *PatchOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.CreateOnly != nil {
+		i--
+		if *m.CreateOnly {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x28
+	}
 	i -= len(m.FieldValidation)
 	copy(dAtA[i:], m.FieldValidation)
 	i = encodeVarintGenerated(dAtA, i, uint64(len(m.FieldValidation)))
@@ -2319,6 +2344,11 @@ func (m *ApplyOptions) Size() (n int) {
 	n += 2
 	l = len(m.FieldManager)
 	n += 1 + l + sovGenerated(uint64(l))
+	l = len(m.FieldValidation)
+	n += 1 + l + sovGenerated(uint64(l))
+	if m.CreateOnly != nil {
+		n += 2
+	}
 	return n
 }
 
@@ -2797,6 +2827,9 @@ func (m *PatchOptions) Size() (n int) {
 	n += 1 + l + sovGenerated(uint64(l))
 	l = len(m.FieldValidation)
 	n += 1 + l + sovGenerated(uint64(l))
+	if m.CreateOnly != nil {
+		n += 2
+	}
 	return n
 }
 
@@ -3086,6 +3119,8 @@ func (this *ApplyOptions) String() string {
 		`DryRun:` + fmt.Sprintf("%v", this.DryRun) + `,`,
 		`Force:` + fmt.Sprintf("%v", this.Force) + `,`,
 		`FieldManager:` + fmt.Sprintf("%v", this.FieldManager) + `,`,
+		`FieldValidation:` + fmt.Sprintf("%v", this.FieldValidation) + `,`,
+		`CreateOnly:` + valueToStringGenerated(this.CreateOnly) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -3392,6 +3427,7 @@ func (this *PatchOptions) String() string {
 		`Force:` + valueToStringGenerated(this.Force) + `,`,
 		`FieldManager:` + fmt.Sprintf("%v", this.FieldManager) + `,`,
 		`FieldValidation:` + fmt.Sprintf("%v", this.FieldValidation) + `,`,
+		`CreateOnly:` + valueToStringGenerated(this.CreateOnly) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4522,6 +4558,59 @@ func (m *ApplyOptions) Unmarshal(dAtA []byte) error {
 			}
 			m.FieldManager = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FieldValidation", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenerated
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.FieldValidation = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreateOnly", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenerated
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.CreateOnly = &b
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])
@@ -8797,6 +8886,27 @@ func (m *PatchOptions) Unmarshal(dAtA []byte) error {
 			}
 			m.FieldValidation = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreateOnly", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenerated
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.CreateOnly = &b
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])

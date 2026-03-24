@@ -584,7 +584,21 @@ func (p *patcher) applyPatch(ctx context.Context, _, currentObject runtime.Objec
 	currentObjectHasUID, err := hasUID(currentObject)
 	if err != nil {
 		return nil, err
-	} else if !currentObjectHasUID {
+	}
+
+	// Check for createOnly mode - fail if object already exists
+	if p.options != nil && p.options.CreateOnly != nil && *p.options.CreateOnly {
+		if currentObjectHasUID {
+			// Object already exists, fail with conflict
+			return nil, errors.NewConflict(
+				p.resource.GroupResource(),
+				p.name,
+				fmt.Errorf("object already exists and createOnly is set to true"),
+			)
+		}
+	}
+
+	if !currentObjectHasUID {
 		objToUpdate, patchErr = p.mechanism.createNewObject(ctx)
 	} else {
 		objToUpdate, patchErr = p.mechanism.applyPatchToCurrentObject(ctx, currentObject)
