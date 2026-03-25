@@ -719,6 +719,20 @@ type PatchOptions struct {
 	// will contain all unknown and duplicate fields encountered.
 	// +optional
 	FieldValidation string `json:"fieldValidation,omitempty" protobuf:"bytes,4,name=fieldValidation"`
+
+	// CreateOnly indicates that the request should only succeed if it creates
+	// a new object. If the object already exists, the request will fail with
+	// a Conflict error. This is only applicable to Apply requests.
+	// When both CreateOnly and Force are set to true, the request will fail
+	// with a BadRequest error as these options are mutually exclusive.
+	CreateOnly *bool `json:"createOnly,omitempty" protobuf:"varint,5,opt,name=createOnly"`
+
+	// UpdateOnly indicates that the request should only succeed if it updates
+	// an existing object. If the object does not already exist, the request will
+	// fail with a Conflict error. This is only applicable to Apply requests.
+	// When both UpdateOnly and CreateOnly are set to true, the request will fail
+	// with a BadRequest error as these options are mutually exclusive.
+	UpdateOnly *bool `json:"updateOnly,omitempty" protobuf:"varint,6,opt,name=updateOnly"`
 }
 
 // ApplyOptions may be provided when applying an API object.
@@ -747,10 +761,24 @@ type ApplyOptions struct {
 	// as defined by https://golang.org/pkg/unicode/#IsPrint. This
 	// field is required.
 	FieldManager string `json:"fieldManager" protobuf:"bytes,3,name=fieldManager"`
+
+	// CreateOnly indicates that the request should only succeed if it creates
+	// a new object. If the object already exists, the request will fail with
+	// a Conflict error. This is only applicable to Apply requests.
+	// When both CreateOnly and Force are set to true, the request will fail
+	// with a BadRequest error as these options are mutually exclusive.
+	CreateOnly bool `json:"createOnly,omitempty" protobuf:"varint,4,opt,name=createOnly"`
+
+	// UpdateOnly indicates that the request should only succeed if it updates
+	// an existing object. If the object does not already exist, the request will
+	// fail with a Conflict error. This is only applicable to Apply requests.
+	// When both UpdateOnly and CreateOnly are set to true, the request will fail
+	// with a BadRequest error as these options are mutually exclusive.
+	UpdateOnly bool `json:"updateOnly,omitempty" protobuf:"varint,5,opt,name=updateOnly"`
 }
 
 func (o ApplyOptions) ToPatchOptions() PatchOptions {
-	return PatchOptions{DryRun: o.DryRun, Force: &o.Force, FieldManager: o.FieldManager}
+	return PatchOptions{DryRun: o.DryRun, Force: &o.Force, FieldManager: o.FieldManager, CreateOnly: &o.CreateOnly, UpdateOnly: &o.UpdateOnly}
 }
 
 // +k8s:conversion-gen:explicit-from=net/url.Values

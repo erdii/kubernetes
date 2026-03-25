@@ -846,6 +846,16 @@ func (in *PatchOptions) DeepCopyInto(out *PatchOptions) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CreateOnly != nil {
+		in, out := &in.CreateOnly, &out.CreateOnly
+		*out = new(bool)
+		**out = **in
+	}
+	if in.UpdateOnly != nil {
+		in, out := &in.UpdateOnly, &out.UpdateOnly
+		*out = new(bool)
+		**out = **in
+	}
 	return
 }
 

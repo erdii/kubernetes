@@ -1122,6 +1122,8 @@ func TestPatchToUpdateOptions(t *testing.T) {
 
 					// clear fields that we know belong in PatchOptions only
 					patch.Force = nil
+					patch.CreateOnly = nil
+					patch.UpdateOnly = nil
 
 					if !reflect.DeepEqual(*patch, *got) {
 						t.Fatalf(`round-trip failed:

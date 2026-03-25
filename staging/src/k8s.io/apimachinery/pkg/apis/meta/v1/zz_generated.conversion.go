@@ -484,6 +484,20 @@ func autoConvert_url_Values_To_v1_PatchOptions(in *url.Values, out *PatchOptions
 	} else {
 		out.FieldValidation = ""
 	}
+	if values, ok := map[string][]string(*in)["createOnly"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.CreateOnly, s); err != nil {
+			return err
+		}
+	} else {
+		out.CreateOnly = nil
+	}
+	if values, ok := map[string][]string(*in)["updateOnly"]; ok && len(values) > 0 {
+		if err := runtime.Convert_Slice_string_To_Pointer_bool(&values, &out.UpdateOnly, s); err != nil {
+			return err
+		}
+	} else {
+		out.UpdateOnly = nil
+	}
 	return nil
 }
 

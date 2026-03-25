@@ -166,6 +166,20 @@ message ApplyOptions {
   // as defined by https://golang.org/pkg/unicode/#IsPrint. This
   // field is required.
   optional string fieldManager = 3;
+
+  // CreateOnly indicates that the request should only succeed if it creates
+  // a new object. If the object already exists, the request will fail with
+  // a Conflict error. This is only applicable to Apply requests.
+  // When both CreateOnly and Force are set to true, the request will fail
+  // with a BadRequest error as these options are mutually exclusive.
+  optional bool createOnly = 4;
+
+  // UpdateOnly indicates that the request should only succeed if it updates
+  // an existing object. If the object does not already exist, the request will
+  // fail with a Conflict error. This is only applicable to Apply requests.
+  // When both UpdateOnly and CreateOnly are set to true, the request will fail
+  // with a BadRequest error as these options are mutually exclusive.
+  optional bool updateOnly = 5;
 }
 
 // Condition contains details for one aspect of the current state of this API Resource.
@@ -1025,6 +1039,20 @@ message PatchOptions {
   // will contain all unknown and duplicate fields encountered.
   // +optional
   optional string fieldValidation = 4;
+
+  // CreateOnly indicates that the request should only succeed if it creates
+  // a new object. If the object already exists, the request will fail with
+  // a Conflict error. This is only applicable to Apply requests.
+  // When both CreateOnly and Force are set to true, the request will fail
+  // with a BadRequest error as these options are mutually exclusive.
+  optional bool createOnly = 5;
+
+  // UpdateOnly indicates that the request should only succeed if it updates
+  // an existing object. If the object does not already exist, the request will
+  // fail with a Conflict error. This is only applicable to Apply requests.
+  // When both UpdateOnly and CreateOnly are set to true, the request will fail
+  // with a BadRequest error as these options are mutually exclusive.
+  optional bool updateOnly = 6;
 }
 
 // Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.

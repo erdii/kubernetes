@@ -4889,6 +4889,261 @@ func TestCreateOnApplyFailsWithForbidden(t *testing.T) {
 	require.NoError(t, errNone, "pod create via SSA should succeed now that RBAC is correct")
 }
 
+// TestApplyCreateOnly tests the createOnly option for server-side apply.
+func TestApplyCreateOnly(t *testing.T) {
+	client, closeFn := setup(t)
+	defer closeFn()
+
+	podBody := `{
+		"apiVersion": "v1",
+		"kind": "Pod",
+		"metadata": {
+			"name": "test-createonly-pod"
+		},
+		"spec": {
+			"containers": [{
+				"name":  "test-container",
+				"image": "test-image"
+			}]
+		}
+	}`
+
+	// First apply with createOnly=true should succeed and create new object.
+	t.Run("CreateWithCreateOnly", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-createonly-pod").
+			Param("fieldManager", "test-manager").
+			Param("createOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err != nil {
+			t.Fatalf("Failed to create object with createOnly=true: %v", err)
+		}
+	})
+
+	// Second apply with createOnly=true should fail with Conflict.
+	t.Run("UpdateWithCreateOnlyFails", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-createonly-pod").
+			Param("fieldManager", "test-manager").
+			Param("createOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatal("Expected conflict error when applying with createOnly=true to existing object")
+		}
+
+		if !apierrors.IsConflict(err) {
+			t.Fatalf("Expected Conflict error, got: %v", err)
+		}
+
+		// Verify the error message mentions createOnly
+		if !strings.Contains(err.Error(), "createOnly") {
+			t.Fatalf("Expected error message to mention createOnly, got: %v", err)
+		}
+	})
+
+	// Apply without createOnly should succeed on existing object.
+	t.Run("UpdateWithoutCreateOnly", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-createonly-pod").
+			Param("fieldManager", "test-manager").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err != nil {
+			t.Fatalf("Failed to update object without createOnly: %v", err)
+		}
+	})
+
+	// createOnly with non-apply patch type should fail.
+	t.Run("CreateOnlyWithNonApplyPatch", func(t *testing.T) {
+		mergePatchBody := `{"metadata":{"labels":{"test":"label"}}}`
+		_, err := client.CoreV1().RESTClient().Patch(types.MergePatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-createonly-pod").
+			Param("createOnly", "true").
+			Body([]byte(mergePatchBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatal("Expected error when using createOnly with non-apply patch type")
+		}
+
+		if !apierrors.IsBadRequest(err) && !apierrors.IsInvalid(err) {
+			t.Fatalf("Expected BadRequest or Invalid error, got: %v", err)
+		}
+	})
+
+	// createOnly=true with force=true should fail validation.
+	t.Run("CreateOnlyWithForceFails", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-createonly-pod-force").
+			Param("fieldManager", "test-manager").
+			Param("createOnly", "true").
+			Param("force", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatal("Expected error when using both createOnly=true and force=true")
+		}
+
+		if !apierrors.IsBadRequest(err) && !apierrors.IsInvalid(err) {
+			t.Fatalf("Expected BadRequest or Invalid error, got: %v", err)
+		}
+	})
+
+	// createOnly=true with updateOnly=true should fail validation.
+	t.Run("CreateOnlyWithUpdateOnlyFails", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-updateonly-pod-force").
+			Param("fieldManager", "test-manager").
+			Param("createOnly", "true").
+			Param("updateOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatal("Expected error when using both createOnly=true and updateOnly=true")
+		}
+
+		if !apierrors.IsBadRequest(err) && !apierrors.IsInvalid(err) {
+			t.Fatalf("Expected BadRequest or Invalid error, got: %v", err)
+		}
+	})
+
+	// Cleanup
+	err := client.CoreV1().Pods("default").Delete(context.TODO(), "test-createonly-pod", metav1.DeleteOptions{})
+	if err != nil {
+		t.Logf("Failed to cleanup test pod: %v", err)
+	}
+}
+
+// TestApplyUpdateOnly tests the updateOnly option for server-side apply.
+func TestApplyUpdateOnly(t *testing.T) {
+	client, closeFn := setup(t)
+	defer closeFn()
+
+	podBody := `{
+		"apiVersion": "v1",
+		"kind": "Pod",
+		"metadata": {
+			"name": "test-updateonly-pod"
+		},
+		"spec": {
+			"containers": [{
+				"name":  "test-container",
+				"image": "test-image"
+			}]
+		}
+	}`
+
+	// First apply with updateOnly=true should fail.
+	t.Run("CreateWithUpdateOnlyFails", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-updateonly-pod").
+			Param("fieldManager", "test-manager").
+			Param("updateOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatalf("Expected conflict error when applying to not existing object with updateOnly=true: %v", err)
+		}
+
+		if !apierrors.IsConflict(err) {
+			t.Fatalf("Expected Conflict error, got: %v", err)
+		}
+
+		// Verify the error message mentions updateOnly.
+		if !strings.Contains(err.Error(), "updateOnly") {
+			t.Fatalf("Expected error message to mention updateOnly, got: %v", err)
+		}
+
+	})
+
+	// Applying to an existing object with updateOnly=true should succeed.
+	t.Run("UpdateWithUpdateOnly", func(t *testing.T) {
+		_, err := client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-updateonly-pod").
+			Param("fieldManager", "test-manager").
+			Param("createOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err != nil {
+			t.Fatalf("Failed to create test pod: %v", err)
+		}
+
+		_, err = client.CoreV1().RESTClient().Patch(types.ApplyPatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-updateonly-pod").
+			Param("fieldManager", "test-manager").
+			Param("updateOnly", "true").
+			Body([]byte(podBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err != nil {
+			t.Fatalf("Failed to update test pod with updateOnly=true: %v", err)
+		}
+	})
+
+	// updateOnly with non-apply patch type should fail.
+	t.Run("UpdateOnlyWithNonApplyPatch", func(t *testing.T) {
+		mergePatchBody := `{"metadata":{"labels":{"test":"label"}}}`
+		_, err := client.CoreV1().RESTClient().Patch(types.MergePatchType).
+			Namespace("default").
+			Resource("pods").
+			Name("test-updateonly-pod").
+			Param("updateOnly", "true").
+			Body([]byte(mergePatchBody)).
+			Do(context.TODO()).
+			Get()
+
+		if err == nil {
+			t.Fatal("Expected error when using updateOnly with non-apply patch type")
+		}
+
+		if !apierrors.IsBadRequest(err) && !apierrors.IsInvalid(err) {
+			t.Fatalf("Expected BadRequest or Invalid error, got: %v", err)
+		}
+	})
+
+	// Cleanup
+	err := client.CoreV1().Pods("default").Delete(context.TODO(), "test-updateonly-pod", metav1.DeleteOptions{})
+	if err != nil {
+		t.Logf("Failed to cleanup test pod: %v", err)
+	}
+}
+
 func requireForbiddenPodErr(t *testing.T, err error, message string) {
 	t.Helper()
 

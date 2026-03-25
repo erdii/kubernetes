@@ -597,6 +597,20 @@ func schema_pkg_apis_meta_v1_ApplyOptions(ref common.ReferenceCallback) common.O
 							Format:      "",
 						},
 					},
+					"createOnly": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CreateOnly indicates that the request should only succeed if it creates a new object. If the object already exists, the request will fail with a Conflict error. This is only applicable to Apply requests. When both CreateOnly and Force are set to true, the request will fail with a BadRequest error as these options are mutually exclusive.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"updateOnly": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpdateOnly indicates that the request should only succeed if it updates an existing object. If the object does not already exist, the request will fail with a Conflict error. This is only applicable to Apply requests. When both UpdateOnly and CreateOnly are set to true, the request will fail with a BadRequest error as these options are mutually exclusive.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
 				},
 				Required: []string{"force", "fieldManager"},
 			},
@@ -1909,6 +1923,20 @@ func schema_pkg_apis_meta_v1_PatchOptions(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.",
 							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"createOnly": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CreateOnly indicates that the request should only succeed if it creates a new object. If the object already exists, the request will fail with a Conflict error. This is only applicable to Apply requests. When both CreateOnly and Force are set to true, the request will fail with a BadRequest error as these options are mutually exclusive.",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"updateOnly": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpdateOnly indicates that the request should only succeed if it updates an existing object. If the object does not already exist, the request will fail with a Conflict error. This is only applicable to Apply requests. When both UpdateOnly and CreateOnly are set to true, the request will fail with a BadRequest error as these options are mutually exclusive.",
+							Type:        []string{"boolean"},
 							Format:      "",
 						},
 					},
